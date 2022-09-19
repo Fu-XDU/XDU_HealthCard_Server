@@ -12,9 +12,9 @@ import (
 )
 
 const (
-	clientIdentifier = "ServerApp" // Client identifier to advertise over the network
+	clientIdentifier = "XDU Health Card Server" // Client identifier to advertise over the network
 	clientVersion    = "1.0.0"
-	clientUsage      = "A golang web server scaffolding using Gin framework"
+	clientUsage      = "The web server for XDU Health Card Wechat Mini Program"
 )
 
 var (
@@ -23,6 +23,8 @@ var (
 		flags.PortFlag,
 		flags.AppidFlag,
 		flags.SecretFlag,
+		flags.HmacSecretFlag,
+		flags.MapApiKeyFlag,
 	}
 	mysqlFlags = []cli.Flag{
 		flags.MysqlHostFlag,

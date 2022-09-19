@@ -2,9 +2,18 @@ version: '3.5'
 services:
   web:
     image: ${IMG_NAME}
-    container_name: web_server_hello
+    container_name: xdu_health_card_server
     restart: always
     ports:
       - "1423:1423"
     environment:
       SERVER_PORT: 1423
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWD: 123456
+      MYSQL_DB: xdu_health_card
+      APPID: Example
+      SECRET: Example
+      MAP_API_KEY: AL3BZ-VNCCR-TXHOD-VNC3B-VNC5H-AL3GV
+      HMAC_SECRET: Example

@@ -8,6 +8,6 @@ import (
 func addAuthRoutes(rg *gin.RouterGroup) {
 	auth := rg.Group("/auth")
 	{
-		auth.GET("/login", controller.Login)
+		auth.POST("/login", controller.Login)
 	}
 }

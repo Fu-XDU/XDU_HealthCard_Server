@@ -8,11 +8,14 @@ import (
 )
 
 func Login(c *gin.Context) {
-	code := c.GetString("code")
-	data, err := service.Login(code)
+	var request *struct {
+		Code string `json:"code"`
+	}
+	err := c.ShouldBind(&request)
 	if err != nil {
 		c.JSON(http.StatusOK, base.NewErrorResponse(err, base.BindDataFailed))
-	} else {
-		c.JSON(http.StatusOK, base.NewDataResponse(data))
+		return
 	}
+	response := service.Login(request.Code)
+	c.JSON(http.StatusOK, response)
 }

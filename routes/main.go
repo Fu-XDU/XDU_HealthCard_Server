@@ -6,12 +6,20 @@ import (
 )
 
 var (
-	router = gin.Default()
+	//router = gin.Default()
+	router *gin.Engine
 )
 
 // Run will start the server
 func Run(port string) {
+	gin.SetMode(gin.ReleaseMode)
+	router = gin.Default()
+
 	getRoutes()
+
+	if gin.Mode() != gin.DebugMode {
+		log.Info("Server listening on port " + port)
+	}
 	log.Fatal(router.Run(":" + port))
 }
 

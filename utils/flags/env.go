@@ -7,6 +7,8 @@ var (
 	MysqlDB     string
 	MysqlPort   int
 
-	AppID  string
-	Secret string
+	AppID      string
+	Secret     string
+	HmacSecret string
+	MapApiKey  string
 )

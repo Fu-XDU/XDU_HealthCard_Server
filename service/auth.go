@@ -3,23 +3,34 @@ package service
 import (
 	"encoding/json"
 	"fmt"
+	"xdu-health-card/auth"
 	"xdu-health-card/model"
 	"xdu-health-card/model/base"
 	"xdu-health-card/utils"
 	"xdu-health-card/utils/flags"
 )
 
-func Login(code string) (res interface{}, err error) {
-	response := code2Session(code)
-	if response.
+func Login(code string) (response *base.Response) {
+	response = code2Session(code)
+	if !response.Success {
+		return
+	}
+
+	authRes := response.Data.(*model.AuthResult)
+	openid := authRes.Openid
+	jwt, err := auth.NewJwt(openid)
+	if err != nil {
+		return base.NewErrorResponse(err, base.NewJwtFailed)
+	}
+	response.Data = jwt
 	return
 }
 
 func code2Session(code string) (response *base.Response) {
 	response = base.NewResponse()
-	url := fmt.Sprintf("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", flags.AppID, flags.Secret, auth.Code)
+	url := fmt.Sprintf("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", flags.AppID, flags.Secret, code)
 
-	get, err := utils.Get(url)
+	_, get, err := utils.Get(url)
 	if err != nil {
 		return base.NewErrorResponse(err, base.ConnectWxFailed)
 	}
@@ -37,11 +48,6 @@ func code2Session(code string) (response *base.Response) {
 	case 45011:
 		return base.NewErrorResponse(err, base.FrequencyLimit)
 	}
-
-	//_, err = redis.SetSessionID(authRes.Openid, authRes.SessionKey)
-	//if err != nil {
-	//	return base.NewErrorResponse(err, base.SetSessionIDFailed)
-	//}
 
 	response = base.NewDataResponse(authRes)
 	return

@@ -34,12 +34,8 @@ func StorageThreeCheck(c *gin.Context) {
 		return
 	}
 
-	err = service.StorageThreeCheck(request)
-	if err != nil {
-		c.JSON(http.StatusOK, base.NewErrorResponse(err, base.BindDataFailed))
-	} else {
-		c.JSON(http.StatusOK, base.NewResponse())
-	}
+	retCode, err := service.StorageThreeCheck(request)
+	c.JSON(http.StatusOK, base.NewErrorResponse(err, retCode))
 }
 
 func StorageHealthCard(c *gin.Context) {
@@ -63,30 +59,18 @@ func StorageHealthCard(c *gin.Context) {
 		c.JSON(http.StatusOK, base.NewErrorResponse(err, base.BindDataFailed))
 		return
 	}
-	err = service.StorageHealthCard(request.ToHealthCard(location))
-	if err != nil {
-		c.JSON(http.StatusOK, base.NewErrorResponse(err, base.BindDataFailed))
-	} else {
-		c.JSON(http.StatusOK, base.NewResponse())
-	}
+	retCode, err := service.StorageHealthCard(request.ToHealthCard(location))
+	c.JSON(http.StatusOK, base.NewErrorResponse(err, retCode))
 }
 
 func DeleteThreeCheck(c *gin.Context) {
 	openid := c.GetString("openid")
-	err := service.DeleteThreeCheck(openid)
-	if err != nil {
-		c.JSON(http.StatusOK, base.NewErrorResponse(err, base.BindDataFailed))
-	} else {
-		c.JSON(http.StatusOK, base.NewResponse())
-	}
+	retCode, err := service.DeleteThreeCheck(openid)
+	c.JSON(http.StatusOK, base.NewErrorResponse(err, retCode))
 }
 
 func DeleteHealthCard(c *gin.Context) {
 	openid := c.GetString("openid")
-	err := service.DeleteHealthCard(openid)
-	if err != nil {
-		c.JSON(http.StatusOK, base.NewErrorResponse(err, base.BindDataFailed))
-	} else {
-		c.JSON(http.StatusOK, base.NewResponse())
-	}
+	retCode, err := service.DeleteHealthCard(openid)
+	c.JSON(http.StatusOK, base.NewErrorResponse(err, retCode))
 }

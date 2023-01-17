@@ -7,6 +7,13 @@ var (
 	MysqlDB     string
 	MysqlPort   int
 
+	RedisHost     string
+	RedisPort     int
+	RedisDb       int
+	RedisUser     string
+	RedisPasswd   string
+	RedisPoolSize int
+
 	AppID      string
 	Secret     string
 	HmacSecret string

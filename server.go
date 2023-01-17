@@ -33,6 +33,14 @@ var (
 		flags.MysqlPasswdFlag,
 		flags.MysqlDBFlag,
 	}
+	redisFlags = []cli.Flag{
+		flags.RedisHostFlag,
+		flags.RedisPortFlag,
+		flags.RedisDbFlag,
+		flags.RedisUserFlag,
+		flags.RedisPasswdFlag,
+		flags.RedisPoolSizeFlag,
+	}
 )
 
 func init() {
@@ -43,6 +51,7 @@ func init() {
 	app.Commands = []cli.Command{}
 	app.Flags = append(app.Flags, baseFlags...)
 	app.Flags = append(app.Flags, mysqlFlags...)
+	app.Flags = append(app.Flags, redisFlags...)
 }
 
 func ServerApp(ctx *cli.Context) error {

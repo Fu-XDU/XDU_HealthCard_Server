@@ -38,3 +38,7 @@ func initMysql() (err error) {
 	err = db.AutoMigrate(&model.HealthCard{}, &model.ThreeCheck{})
 	return
 }
+
+func DoTransaction(f func(tx *gorm.DB) error) (err error) {
+	return db.Transaction(f)
+}

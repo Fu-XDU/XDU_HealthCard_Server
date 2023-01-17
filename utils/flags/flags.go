@@ -46,6 +46,49 @@ var (
 		Destination: &MysqlDB,
 	}
 
+	RedisHostFlag = cli.StringFlag{
+		Name:        "RedisHost",
+		Usage:       "RedisHost",
+		Value:       "127.0.0.1",
+		EnvVar:      "REDIS_HOST",
+		Destination: &RedisHost,
+	}
+	RedisPortFlag = cli.IntFlag{
+		Name:        "RedisPort",
+		Usage:       "RedisPort",
+		Value:       6379,
+		EnvVar:      "REDIS_PORT",
+		Destination: &RedisPort,
+	}
+	RedisDbFlag = cli.IntFlag{
+		Name:        "RedisDb",
+		Usage:       "RedisDb",
+		Value:       0,
+		EnvVar:      "REDIS_DB",
+		Destination: &RedisDb,
+	}
+	RedisUserFlag = cli.StringFlag{
+		Name:        "RedisUser",
+		Usage:       "Database username for Redis",
+		Value:       "",
+		EnvVar:      "REDIS_USER",
+		Destination: &RedisUser,
+	}
+	RedisPasswdFlag = cli.StringFlag{
+		Name:        "RedisPasswd",
+		Usage:       "Database password for Redis",
+		Value:       "123456",
+		EnvVar:      "REDIS_PASSWD",
+		Destination: &RedisPasswd,
+	}
+	RedisPoolSizeFlag = cli.IntFlag{
+		Name:        "RedisPoolSize",
+		Usage:       "RedisPoolSize",
+		Value:       100,
+		EnvVar:      "REDIS_POOL_SIZE",
+		Destination: &RedisPoolSize,
+	}
+
 	AppidFlag = cli.StringFlag{
 		Name:        "appid",
 		Usage:       "Appid",

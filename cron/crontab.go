@@ -55,7 +55,7 @@ func threeCheckWorker() {
 		cookies := response.Data.(string)
 		err = service.SubmitThreeCheck(cookies, item.Location)
 		if err != nil {
-			log.Error(response)
+			log.Error(err)
 		}
 	}
 }

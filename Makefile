@@ -10,11 +10,11 @@ docker:
 start:
 	IMG_NAME=${IMG_NAME} docker-compose -f docker-compose.yaml up -d
 
-stop:
-	docker-compose -f docker-compose.yaml down
+down:
+	IMG_NAME=${IMG_NAME} docker-compose -f docker-compose.yaml down
 
 restart:
-	docker-compose -f docker-compose.yaml restart
+	IMG_NAME=${IMG_NAME} docker-compose -f docker-compose.yaml restart
 
 server-all:
 	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o ./bin/server-darwin-amd64 .
